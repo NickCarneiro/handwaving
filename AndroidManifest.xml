@@ -5,7 +5,10 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="19"/>
     <uses-feature android:name="android.hardware.sensor.proximity"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
+        <service android:name="SwipeService" />
         <activity android:name="MainActivity"
                   android:label="@string/app_name">
             <intent-filter>
