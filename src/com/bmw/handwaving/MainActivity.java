@@ -8,12 +8,13 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.ImageView;
 
 public class MainActivity extends Activity implements SensorEventListener {
     private SensorManager mSensorManager;
     private Sensor proximitySensor;
-    ImageView iv;
+    long lastProximityEventTime = 0;
+    ProximityState lastProximityState;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,13 @@ public class MainActivity extends Activity implements SensorEventListener {
     }
 
     public void onSensorChanged(SensorEvent event) {
-        Log.i("MainActivity", "CHANGE: " + String.valueOf(event.values[0]));
+        final ProximityState proximityState;
+        if (event.values[0] == 0) {
+            proximityState = ProximityState.NEAR;
+        } else {
+            proximityState = ProximityState.FAR;
+        }
+        Log.i("MainActivity", "CHANGE: " + proximityState);
 
     }
 }
